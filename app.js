@@ -91,3 +91,48 @@ function decodeMsg(){
     }
 
 }
+// Function to generate Morse code audio
+function generateMorseCodeAudio(message) {
+    // Check if the AudioContext is available
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+  
+    if (AudioContext) {
+      const audioContext = new AudioContext();
+  
+      // Set up gain node and connect it to the audio context
+      const gainNode = audioContext.createGain();
+      gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+      gainNode.connect(audioContext.destination);
+  
+      // Convert text to Morse code
+      const morseCode = MorseCode.encode(message);
+  
+      // Play Morse code audio within a user-initiated event
+      document.getElementById('playButton').addEventListener('click', () => {
+        morseCode.split('').forEach((symbol, index) => {
+          const oscillator = audioContext.createOscillator();
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+  
+          if (symbol === '.') {
+            oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.3);
+          } else if (symbol === '-') {
+            oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.3);
+          } else if (symbol === ' ') {
+            // Add space between Morse code symbols
+            oscillator.frequency.setValueAtTime(0, audioContext.currentTime + index * 0.3);
+          }
+  
+          // Connect oscillator to gain node and start/stop it
+          oscillator.connect(gainNode);
+          oscillator.start(audioContext.currentTime + index * 0.3);
+          oscillator.stop(audioContext.currentTime + (index + 1) * 0.3);
+        });
+      });
+    } else {
+      console.error('AudioContext is not supported in this environment.');
+    }
+  }
+  
+  // Example usage
+  generateMorseCodeAudio("HELLO");
