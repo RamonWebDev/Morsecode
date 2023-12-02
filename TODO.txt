@@ -1,0 +1,4 @@
+#TODO list
+1. Create audio files of encoded messages
+2. Design Website
+3. Think of better ways to improve code 
