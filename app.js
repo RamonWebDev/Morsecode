@@ -1,3 +1,4 @@
+//Creator of Morse Code https://github.com/Syncthetic/MorseCode/tree/master
 const MorseCode = {
 
     encode: (data) => {
