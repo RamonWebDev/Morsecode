@@ -1,4 +1,5 @@
 #TODO list
 1. Create audio files of encoded messages
-2. Design Website
-3. Think of better ways to improve code 
+2. Give user option to listen and download audio file
+3. Design Website
+4. Think of better ways to improve code 
