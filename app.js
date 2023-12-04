@@ -66,8 +66,9 @@ const MorseCode = {
   
   };
 
+//Encode messages to Morse code
 function codeMsg(){
-    let inputMsg = document.getElementById('encodeMsg').value.trim(); 
+    let inputMsg = document.getElementById('msg').value.trim(); 
     if(inputMsg){
         let encode = MorseCode.encode.call(this, inputMsg);
         if(encode){
@@ -79,8 +80,9 @@ function codeMsg(){
 
 }
 
+//Decode messages from Morse code
 function decodeMsg(){
-    let inputMsg = document.getElementById('decodeMsg').value.trim();
+    let inputMsg = document.getElementById('msg').value.trim();
     if(inputMsg){
         let decode = MorseCode.decode.call(this, inputMsg);
         if(decode){
@@ -91,48 +93,55 @@ function decodeMsg(){
     }
 
 }
-// Function to generate Morse code audio
-function generateMorseCodeAudio(message) {
-    // Check if the AudioContext is available
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-  
-    if (AudioContext) {
+
+/*
+function generateMorseCodeAudio() {
+  let message = document.getElementById('msg').value.trim();
+  // Check if the AudioContext is available
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  if (AudioContext) {
       const audioContext = new AudioContext();
-  
+
       // Set up gain node and connect it to the audio context
       const gainNode = audioContext.createGain();
+      // Control the volume here by adjusting the gain value
       gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
       gainNode.connect(audioContext.destination);
-  
+
       // Convert text to Morse code
       const morseCode = MorseCode.encode(message);
-  
-      // Play Morse code audio within a user-initiated event
-      document.getElementById('playButton').addEventListener('click', () => {
-        morseCode.split('').forEach((symbol, index) => {
-          const oscillator = audioContext.createOscillator();
-          oscillator.type = 'sine';
-          oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-  
-          if (symbol === '.') {
-            oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.3);
-          } else if (symbol === '-') {
-            oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.3);
-          } else if (symbol === ' ') {
-            // Add space between Morse code symbols
-            oscillator.frequency.setValueAtTime(0, audioContext.currentTime + index * 0.3);
-          }
-  
-          // Connect oscillator to gain node and start/stop it
-          oscillator.connect(gainNode);
-          oscillator.start(audioContext.currentTime + index * 0.3);
-          oscillator.stop(audioContext.currentTime + (index + 1) * 0.3);
-        });
-      });
-    } else {
+
+      // Function to handle playing Morse code audio
+      function playMorseCode() {
+          morseCode.split('').forEach((symbol, index) => {
+              const oscillator = audioContext.createOscillator();
+              oscillator.type = 'sine';
+              oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+
+              if (symbol === '.') {
+                  oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.2);
+                  oscillator.frequency.linearRampToValueAtTime(0, audioContext.currentTime + (index + 1) * 0.2);
+              } else if (symbol === '-') {
+                  oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.2);
+                  oscillator.frequency.linearRampToValueAtTime(0, audioContext.currentTime + (index + 1) * 0.2);
+              } else if (symbol === ' ') {
+                  // Add space between Morse code symbols
+                  oscillator.frequency.setValueAtTime(0, audioContext.currentTime + index * 0.2);
+              }
+
+              // Connect oscillator to gain node and start/stop it
+              oscillator.connect(gainNode);
+              oscillator.start(audioContext.currentTime + index * 0.2);
+              oscillator.stop(audioContext.currentTime + (index + 1) * 0.2);
+          });
+      }
+
+      // Remove the previous event listener before adding a new one
+      document.getElementById('playButton').removeEventListener('click', playMorseCode);
+      // Add the event listener
+      document.getElementById('playButton').addEventListener('click', playMorseCode);
+  } else {
       console.error('AudioContext is not supported in this environment.');
-    }
   }
-  
-  // Example usage
-  generateMorseCodeAudio("HELLO");
+}*/
