@@ -1,3 +1,5 @@
+let clipboardIcon = document.querySelector('.bx-clipboard');
+
 //Creator of Morse Code https://github.com/Syncthetic/MorseCode/tree/master
 const MorseCode = {
 
@@ -94,54 +96,51 @@ function decodeMsg(){
 
 }
 
-/*
-function generateMorseCodeAudio() {
-  let message = document.getElementById('msg').value.trim();
-  // Check if the AudioContext is available
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
 
-  if (AudioContext) {
-      const audioContext = new AudioContext();
-
-      // Set up gain node and connect it to the audio context
-      const gainNode = audioContext.createGain();
-      // Control the volume here by adjusting the gain value
-      gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
-      gainNode.connect(audioContext.destination);
-
-      // Convert text to Morse code
-      const morseCode = MorseCode.encode(message);
-
-      // Function to handle playing Morse code audio
-      function playMorseCode() {
-          morseCode.split('').forEach((symbol, index) => {
-              const oscillator = audioContext.createOscillator();
-              oscillator.type = 'sine';
-              oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-
-              if (symbol === '.') {
-                  oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.2);
-                  oscillator.frequency.linearRampToValueAtTime(0, audioContext.currentTime + (index + 1) * 0.2);
-              } else if (symbol === '-') {
-                  oscillator.frequency.setValueAtTime(600, audioContext.currentTime + index * 0.2);
-                  oscillator.frequency.linearRampToValueAtTime(0, audioContext.currentTime + (index + 1) * 0.2);
-              } else if (symbol === ' ') {
-                  // Add space between Morse code symbols
-                  oscillator.frequency.setValueAtTime(0, audioContext.currentTime + index * 0.2);
-              }
-
-              // Connect oscillator to gain node and start/stop it
-              oscillator.connect(gainNode);
-              oscillator.start(audioContext.currentTime + index * 0.2);
-              oscillator.stop(audioContext.currentTime + (index + 1) * 0.2);
-          });
-      }
-
-      // Remove the previous event listener before adding a new one
-      document.getElementById('playButton').removeEventListener('click', playMorseCode);
-      // Add the event listener
-      document.getElementById('playButton').addEventListener('click', playMorseCode);
-  } else {
-      console.error('AudioContext is not supported in this environment.');
+document.addEventListener('DOMContentLoaded', function(){
+  //get Icon
+  let encodeIcon = document.querySelector('.encode')
+  let decodeIcon = document.querySelector('.decode')
+  
+  //Call function if Icon clicked
+  if(encodeIcon){
+    encodeIcon.addEventListener('click', function(){
+      copyEncode();
+    })
   }
-}*/
+  //Call function if Icon clicked
+  if(decodeIcon){
+    decodeIcon.addEventListener('click', function(){
+      copyDecode();
+    })
+  }
+  
+  
+})
+
+
+//Function to copy Encoded text
+function copyEncode(){
+  let encode = document.getElementById('encodeResult').innerHTML;
+      // Copy the text
+      navigator.clipboard.writeText(encode)
+      .then(() => {
+        console.log('Text copied to clipboard:', encode);
+      })
+      .catch(err => {
+        console.error('Unable to copy text to clipboard', err);
+      });
+}
+
+//Function to copy Decoded text
+function copyDecode(){
+  let decode = document.getElementById('decodeResult').innerHTML;
+    // Copy the other text
+    navigator.clipboard.writeText(decode)
+      .then(() => {
+        console.log('Text copied to clipboard:', decode);
+      })
+      .catch(err => {
+        console.error('Unable to copy text to clipboard', err);
+      });
+}
