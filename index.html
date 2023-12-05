@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Stylesheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Box Icons-->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Morse Code Translator</title>
 </head>
 <body>
@@ -16,9 +18,14 @@
             <h2>Translator</h2>
         <textarea name="" id="msg" cols="30" rows="10"></textarea><br>
         <button onclick="codeMsg()">Encode Message</button><button onclick="decodeMsg()">Decode Message</button>
-        <h3 id="encodeResult">Your Coded Message</h3><h3 id="decodeResult">Your Decoded Message</h3> 
+        <div class="sameLine">
+            <h3 id="encodeResult">Your Coded Message</h3><i class='encode clipboardIcon bx bx-clipboard'></i>
+        </div>
+        <div class="sameLine">
+            <h3 id="decodeResult">Your Decoded Message</h3> <i class='decode clipboardIcon bx bx-clipboard'></i> 
+        </div>
+
     </div>
-    <!--<button onclick="generateMorseCodeAudio()" id="playButton">Play</button>-->
 
 </div>
 
