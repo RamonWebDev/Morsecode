@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700&family=Nosifer&family=Roboto:wght@100;400;500&display=swap');
 body{
+    font-family: Roboto, sans-serif;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -42,6 +44,15 @@ button {
 
 h3 {
     text-align: center; 
+}
+.clipboardIcon{
+	cursor: pointer;
+    font-size: 25px;
+}
+
+.sameLine{
+    display: flex;
+    align-items: center;
 }
 
 /*Snow*/
