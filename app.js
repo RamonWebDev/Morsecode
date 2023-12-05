@@ -1,5 +1,3 @@
-let clipboardIcon = document.querySelector('.bx-clipboard');
-
 //Creator of Morse Code https://github.com/Syncthetic/MorseCode/tree/master
 const MorseCode = {
 
