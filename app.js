@@ -142,3 +142,8 @@ function copyDecode(){
         console.error('Unable to copy text to clipboard', err);
       });
 }
+
+function changeStylesheet() {
+  var selectedValue = document.getElementById("stylesheetSelector").value;
+  document.getElementById("stylesheet").setAttribute("href", selectedValue);
+}
