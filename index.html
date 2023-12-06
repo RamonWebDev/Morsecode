@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Stylesheet-->
-    <link rel="stylesheet" href="style.css">
+    <link id="stylesheet" rel="stylesheet" href="style.css">
     <!--Box Icons-->
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Morse Code Translator</title>
@@ -12,10 +12,22 @@
 <body>
     <div class="snow-wrap">
         <div class="snow"></div>
-    </div>
+    </div><!--End snow-->
+
     <div class="card">
         <div class="text">
             <h2>Morse Code Translator</h2>
+            <div class="dropdown">
+                <!-- Dropdown Menu -->
+        <label for="stylesheetSelector">Choose a stylesheet:</label>
+        <select id="stylesheetSelector" onchange="changeStylesheet()">
+            <option value="style.css">Snow</option>
+            <option value="summer.css">Summer</option>
+            <option value="fall.css">Fall</option>
+            <option value="spring.css">Spring</option>
+            <option value="kimi.css">Kimi</option>
+        </select>
+        </div><!--End dropdown-->
         <textarea name="" id="msg" cols="30" rows="10"></textarea><br>
         <button onclick="codeMsg()">Encode Message</button><button onclick="decodeMsg()">Decode Message</button>
         <div class="sameLine">
@@ -26,9 +38,12 @@
         </div>
 
     </div>
-
+    
 </div>
+
+
 
     <script src="app.js"></script>
 </body>
 </html>
+
