@@ -143,7 +143,75 @@ function copyDecode(){
       });
 }
 
+
 function changeStylesheet() {
-  var selectedValue = document.getElementById("stylesheetSelector").value;
-  document.getElementById("stylesheet").setAttribute("href", selectedValue);
+  // Get the selected value from the dropdown
+  const selectedStylesheet = document.getElementById('stylesheetSelector').value;
+
+  // Reset background for all styles except 'summer.css'
+  if (selectedStylesheet !== 'summer.css') {
+    document.body.style.backgroundImage = 'none';
+  }
+
+  // Check if the selected stylesheet is 'kimi.css'
+  if (selectedStylesheet === 'kimi.css') {
+    // If 'Kimi' is selected, change the kimi background
+    changeKimiBackground();
+  }
+
+  // Check if the selected stylesheet is 'summer.css'
+  if (selectedStylesheet === 'summer.css') {
+    // If 'Summer' is selected, set the body background for summer
+    document.body.style.backgroundImage = 'url("img/summer.jpg")';
+    // Adjust the path to the actual image for the 'Summer' background
+  }
+
+  if (selectedStylesheet === 'fall.css') {
+    document.body.style.backgroundImage = 'url("img/fall.avif")';
+  }
+
+  if (selectedStylesheet === 'spring.css') {
+    document.body.style.backgroundImage = 'url("img/spring.jpg")';
+  }
+
+  // Save the selected value to localStorage
+  localStorage.setItem('selectedStylesheet', selectedStylesheet);
+
+  // Apply the selected stylesheet
+  const stylesheetElement = document.getElementById("stylesheet");
+  if (stylesheetElement) {
+    stylesheetElement.setAttribute("href", selectedStylesheet);
+  } else {
+    console.error("Element with ID 'stylesheet' not found");
+  }
+}
+
+// Apply the saved stylesheet on page load
+const savedStylesheet = localStorage.getItem('selectedStylesheet') || 'style.css';
+const stylesheetElement = document.getElementById("stylesheet");
+if (stylesheetElement) {
+  stylesheetElement.setAttribute("href", savedStylesheet);
+} else {
+  console.error("Element with ID 'stylesheet' not found");
+}
+
+function changeKimiBackground() {
+  const kimiImages = [
+      'img/kimi1.jpg',
+      'img/kimi2.jpg',
+      'img/kimi3.jpg',
+      'img/kimi4.jpg',
+      'img/kimi5.jpg',
+      'img/kimi6.jpg',
+      'img/kimi7.jpg',
+      'img/kimi8.jpg',
+      'img/kimi9.jpg',
+      'img/kimi10.jpg',
+  ];
+
+  // Get a random kimi image URL
+  const randomKimiImage = kimiImages[Math.floor(Math.random() * kimiImages.length)];
+
+  // Set the background of the kimi section to the random kimi image
+  document.body.style.backgroundImage = `url(${randomKimiImage})`;
 }
