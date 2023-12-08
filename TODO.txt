@@ -1,3 +1,2 @@
 #TODO list
-1. Design new stylesheet options
-2. Review Code and see where to make improvements
+. Review Code and see where to make improvements
