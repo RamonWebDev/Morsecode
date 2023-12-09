@@ -68,33 +68,40 @@ const MorseCode = {
 
 //Encode messages to Morse code
 function codeMsg(){
-    let inputMsg = document.getElementById('msg').value.trim(); 
-    if(inputMsg){
-        let encode = MorseCode.encode.call(this, inputMsg);
-        if(encode){
-            document.getElementById('encodeResult').innerHTML = encode;
-        }  
-    }else{
-        alert('Invalid Text')
-    }
+    let inputMsg = document.getElementById('msg').value.trim(); //Remove white spaces 
+    handleMorseCode(inputMsg)//calling function to encode
+}
 
+//Handles encoding messages
+function handleMorseCode(inputMsg){
+  if(inputMsg){//Checks if inputMsg is empty
+    let encode = MorseCode.encode.call(this, inputMsg);//encode message
+    if(encode){//if message is encoded
+        document.getElementById('encodeResult').innerHTML = encode;//replace text with coded message
+    }  
+  }else{
+      alert('Invalid Text')//triggers if inputMsg is empty
+}
 }
 
 //Decode messages from Morse code
 function decodeMsg(){
-    let inputMsg = document.getElementById('msg').value.trim();
-    if(inputMsg){
-        let decode = MorseCode.decode.call(this, inputMsg);
-        if(decode){
-            document.getElementById('decodeResult').innerHTML = decode;
-        }   
-    }else{
-        alert('Invalid Code')
-    }
-
+    let inputMsg = document.getElementById('msg').value.trim();//Remove white spaces 
+    handleMorseDecode(inputMsg); //calling function to decode
 }
 
+function handleMorseDecode(inputMsg){
+    if(inputMsg){//Checks if inputMsg is empty
+      let decode = MorseCode.decode.call(this, inputMsg);//encode message
+      if(decode){//if message is decoded
+          document.getElementById('decodeResult').innerHTML = decode;//replace text with coded message
+      }   
+  }else{
+      alert('Invalid Code') //triggers if inputMsg is empty
+  }
+}
 
+//Event listener for copying code
 document.addEventListener('DOMContentLoaded', function(){
   //get Icon
   let encodeIcon = document.querySelector('.encode')
@@ -112,8 +119,6 @@ document.addEventListener('DOMContentLoaded', function(){
       copyDecode();
     })
   }
-  
-  
 })
 
 
